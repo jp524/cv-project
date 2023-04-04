@@ -1,12 +1,6 @@
 import React from 'react';
 import EducationState from '../interfaces/EducationState';
 
-// interface State {
-//   schoolName: string;
-//   degree: string;
-//   date: string;
-// }
-
 class Education extends React.Component<{}, EducationState> {
   constructor(props: any) {
     super(props);
@@ -71,29 +65,40 @@ class Education extends React.Component<{}, EducationState> {
     const { updating, schoolName, degree, date } = this.state;
     const updateView = (
       <form onSubmit={this.onSubmitForm}>
-        <input
-          type="text"
-          name="schoolName"
-          value={schoolName}
-          onChange={this.onInputChange}
-        />
-        <input
-          type="text"
-          name="degree"
-          value={degree}
-          onChange={this.onInputChange}
-        />
-        <input
-          type="text"
-          name="date"
-          value={date}
-          onChange={this.onInputChange}
-        />
+        <label htmlFor="schoolName">
+          School Name:
+          <input
+            type="text"
+            name="schoolName"
+            value={schoolName}
+            onChange={this.onInputChange}
+          />
+        </label>
+        <label htmlFor="degree">
+          Degree type:
+          <input
+            type="text"
+            name="degree"
+            value={degree}
+            onChange={this.onInputChange}
+          />
+        </label>
+        <label htmlFor="date">
+          Dates:
+          <input
+            type="text"
+            name="date"
+            value={date}
+            onChange={this.onInputChange}
+          />
+        </label>
 
-        <button type="button" onClick={this.cancelUpdate}>
-          Cancel
-        </button>
-        <input type="submit" value="Update" />
+        <div className="form--actions">
+          <button type="button" onClick={this.cancelUpdate}>
+            Cancel
+          </button>
+          <input type="submit" value="Update" />
+        </div>
       </form>
     );
 
@@ -109,7 +114,7 @@ class Education extends React.Component<{}, EducationState> {
     );
 
     return (
-      <div className="education">
+      <div className="section">
         <h1>Education</h1>
         {updating ? updateView : staticView}
       </div>
