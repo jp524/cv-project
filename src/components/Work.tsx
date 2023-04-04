@@ -22,7 +22,7 @@ class Work extends React.Component<{}, WorkState> {
     };
   }
 
-  upfromDateMode = () => {
+  updateMode = () => {
     this.setState((prevState: any) => ({
       updating: true,
       workState: {
@@ -78,7 +78,7 @@ class Work extends React.Component<{}, WorkState> {
   render() {
     const { updating, companyName, positionTitle, fromDate, untilDate, tasks } =
       this.state;
-    const upfromDateView = (
+    const updateView = (
       <form onSubmit={this.onSubmitForm}>
         <label htmlFor="companyName">
           Company Name:
@@ -139,13 +139,13 @@ class Work extends React.Component<{}, WorkState> {
         <p>{fromDate}</p>
         <p>{untilDate}</p>
         <p className="textarea">{tasks}</p>
-        <button type="button" onClick={this.upfromDateMode}>
+        <button type="button" onClick={this.updateMode}>
           Edit
         </button>
       </div>
     );
 
-    return <div className="work">{updating ? upfromDateView : staticView}</div>;
+    return <div className="work">{updating ? updateView : staticView}</div>;
   }
 }
 
