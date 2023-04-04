@@ -8,3 +8,7 @@ form {
   flex-direction: column;
   align-items: flex-start;
 }
+
+.textarea {
+  white-space: pre-wrap;
+}
