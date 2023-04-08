@@ -1,7 +1,8 @@
 import React from 'react';
 import EducationState from '../interfaces/EducationState';
+import EducationProps from '../interfaces/EducationProps';
 
-class Education extends React.Component<{}, EducationState> {
+class Education extends React.Component<EducationProps, EducationState> {
   constructor(props: any) {
     super(props);
 
@@ -109,6 +110,12 @@ class Education extends React.Component<{}, EducationState> {
         <p>{date}</p>
         <button type="button" onClick={this.updateMode}>
           Edit
+        </button>
+        <button
+          type="button"
+          onClick={() => this.props.onRemoveClick(this.props.id)}
+        >
+          Remove
         </button>
       </div>
     );

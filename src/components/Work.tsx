@@ -1,7 +1,8 @@
 import React from 'react';
 import WorkState from '../interfaces/WorkState';
+import WorkProps from '../interfaces/WorkProps';
 
-class Work extends React.Component<{}, WorkState> {
+class Work extends React.Component<WorkProps, WorkState> {
   constructor(props: any) {
     super(props);
 
@@ -141,6 +142,12 @@ class Work extends React.Component<{}, WorkState> {
         <p className="textarea">{tasks}</p>
         <button type="button" onClick={this.updateMode}>
           Edit
+        </button>
+        <button
+          type="button"
+          onClick={() => this.props.onRemoveClick(this.props.id)}
+        >
+          Remove
         </button>
       </div>
     );

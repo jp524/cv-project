@@ -1,6 +1,8 @@
 interface AppState {
-  numEducation: number;
-  numWork: number;
+  workIds: number[];
+  workCounter: number;
+  educationIds: number[];
+  educationCounter: number;
 }
 
 export default AppState;
