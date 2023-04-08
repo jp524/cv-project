@@ -8,8 +8,13 @@ class App extends React.Component<{}, AppState> {
   constructor(props: any) {
     super(props);
 
+    // App to be refactored to hold Work and Experience related states
+    // Known issue: upon clicking "Remove" button for one Work or Experience component all get deleted
     this.state = {
-      numWork: 1,
+      workIds: [0],
+      workCounter: 1,
+      educationIds: [0],
+      educationCounter: 1,
     };
   }
 
