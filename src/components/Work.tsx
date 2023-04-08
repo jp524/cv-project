@@ -8,58 +8,38 @@ class Work extends React.Component<WorkProps, WorkState> {
 
     this.state = {
       updating: false,
-      companyName: 'Google',
-      positionTitle: 'Software Developer',
-      fromDate: 'Dec 2020',
-      untilDate: 'Mar 2022',
-      tasks: 'A paragraph',
-      workState: {
-        companyName: '',
-        positionTitle: '',
-        fromDate: '',
-        untilDate: '',
-        tasks: '',
-      },
+      id: 0,
+      companyName: '',
+      positionTitle: '',
+      fromDate: '',
+      untilDate: '',
+      tasks: '',
     };
   }
 
-  updateMode = () => {
-    this.setState((prevState: any) => ({
-      updating: true,
-      workState: {
-        ...prevState.workState,
-        companyName: this.state.companyName,
-        positionTitle: this.state.positionTitle,
-        fromDate: this.state.fromDate,
-        untilDate: this.state.untilDate,
-        tasks: this.state.tasks,
-      },
-    }));
+  applyStateToProps = () => {
+    this.setState({
+      id: this.props.workObject.id,
+      companyName: this.props.workObject.companyName,
+      positionTitle: this.props.workObject.positionTitle,
+      fromDate: this.props.workObject.fromDate,
+      untilDate: this.props.workObject.untilDate,
+      tasks: this.props.workObject.tasks,
+    });
   };
 
-  cancelUpfromDate = () => {
+  updateMode = () => {
+    this.setState({
+      updating: true,
+    });
+    this.applyStateToProps();
+  };
+
+  cancelUpdate = () => {
     this.setState({
       updating: false,
-      companyName: this.state.workState.companyName,
-      positionTitle: this.state.workState.positionTitle,
-      fromDate: this.state.workState.fromDate,
-      untilDate: this.state.workState.untilDate,
-      tasks: this.state.workState.tasks,
     });
-    this.resetPrevState;
-  };
-
-  resetPrevState = () => {
-    this.setState((prevState: any) => ({
-      workState: {
-        ...prevState.workState,
-        companyName: '',
-        positionTitle: '',
-        fromDate: '',
-        untilDate: '',
-        tasks: '',
-      },
-    }));
+    this.applyStateToProps();
   };
 
   onInputChange = (e: { target: { name: any; value: any } }) => {
@@ -73,12 +53,23 @@ class Work extends React.Component<WorkProps, WorkState> {
     this.setState({
       updating: false,
     });
-    this.resetPrevState;
+    const { id, companyName, positionTitle, fromDate, untilDate, tasks } =
+      this.state;
+    const updatedWorkObject = {
+      id,
+      companyName,
+      positionTitle,
+      fromDate,
+      untilDate,
+      tasks,
+    };
+    this.props.onUpdate(updatedWorkObject);
   };
 
   render() {
     const { updating, companyName, positionTitle, fromDate, untilDate, tasks } =
       this.state;
+    const { workObject } = this.props;
     const updateView = (
       <form onSubmit={this.onSubmitForm}>
         <label htmlFor="companyName">
@@ -125,7 +116,7 @@ class Work extends React.Component<WorkProps, WorkState> {
         </label>
 
         <div className="form--actions">
-          <button type="button" onClick={this.cancelUpfromDate}>
+          <button type="button" onClick={this.cancelUpdate}>
             Cancel
           </button>
           <input type="submit" value="Update" />
@@ -135,20 +126,20 @@ class Work extends React.Component<WorkProps, WorkState> {
 
     const staticView = (
       <div>
-        <p>{companyName}</p>
-        <p>{positionTitle}</p>
-        <p>{fromDate}</p>
-        <p>{untilDate}</p>
-        <p className="textarea">{tasks}</p>
+        <p>{workObject.companyName}</p>
+        <p>{workObject.positionTitle}</p>
+        <p>{workObject.fromDate}</p>
+        <p>{workObject.untilDate}</p>
+        <p className="textarea">{workObject.tasks}</p>
         <button type="button" onClick={this.updateMode}>
           Edit
         </button>
-        <button
+        {/* <button
           type="button"
           onClick={() => this.props.onRemoveClick(this.props.id)}
         >
           Remove
-        </button>
+        </button> */}
       </div>
     );
 

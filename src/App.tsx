@@ -11,27 +11,47 @@ class App extends React.Component<{}, AppState> {
     // App to be refactored to hold Work and Experience related states
     // Known issue: upon clicking "Remove" button for one Work or Experience component all get deleted
     this.state = {
-      workIds: [0],
       workCounter: 1,
+      workObjects: [
+        {
+          id: 0,
+          companyName: 'Google',
+          positionTitle: 'Software Developer',
+          fromDate: 'Dec 2020',
+          untilDate: 'Mar 2022',
+          tasks: 'A paragraph',
+        },
+      ],
       educationIds: [0],
       educationCounter: 1,
     };
   }
 
-  addWork = () => {
+  updateWork = (updatedWorkObject: any) => {
+    const index = this.state.workObjects.findIndex(
+      (obj) => obj.id == updatedWorkObject.id
+    );
+    const newWorkObjects = this.state.workObjects;
+    newWorkObjects[index] = updatedWorkObject;
     this.setState({
-      workIds: [...this.state.workIds, this.state.workCounter],
-      workCounter: this.state.workCounter + 1,
+      workObjects: newWorkObjects,
     });
   };
 
-  removeWork = (id: number) => {
-    this.setState({
-      workIds: this.state.workIds.filter((workId) => {
-        workId !== id;
-      }),
-    });
-  };
+  // addWork = () => {
+  //   this.setState({
+  //     workIds: [...this.state.workIds, this.state.workCounter],
+  //     workCounter: this.state.workCounter + 1,
+  //   });
+  // };
+
+  // removeWork = (id: number) => {
+  //   this.setState({
+  //     workIds: this.state.workIds.filter((workId) => {
+  //       workId !== id;
+  //     }),
+  //   });
+  // };
 
   addEducation = () => {
     this.setState({
@@ -49,14 +69,18 @@ class App extends React.Component<{}, AppState> {
   };
 
   render() {
-    const { workIds, educationIds } = this.state;
+    const { workObjects, educationIds } = this.state;
 
     return (
       <div className="app">
         <div className="section">
           <h1>Work</h1>
-          {workIds.map((workId) => (
-            <Work key={workId} id={workId} onRemoveClick={this.removeWork} />
+          {workObjects.map((workObject) => (
+            <Work
+              key={workObject.id}
+              workObject={workObject}
+              onUpdate={this.updateWork}
+            />
           ))}
           <button onClick={this.addWork}>Add Work Experience</button>
         </div>
