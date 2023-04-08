@@ -8,7 +8,7 @@ interface WorkProps {
     tasks: string;
   };
   onUpdate: React.MouseEventHandler<HTMLButtonElement>;
-  // onRemoveClick: React.MouseEventHandler<HTMLButtonElement>;
+  onRemove: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 export default WorkProps;

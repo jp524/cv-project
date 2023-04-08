@@ -134,12 +134,12 @@ class Work extends React.Component<WorkProps, WorkState> {
         <button type="button" onClick={this.updateMode}>
           Edit
         </button>
-        {/* <button
+        <button
           type="button"
-          onClick={() => this.props.onRemoveClick(this.props.id)}
+          onClick={() => this.props.onRemove(workObject.id)}
         >
           Remove
-        </button> */}
+        </button>
       </div>
     );
 

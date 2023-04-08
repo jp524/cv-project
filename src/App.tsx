@@ -15,11 +15,11 @@ class App extends React.Component<{}, AppState> {
       workObjects: [
         {
           id: 0,
-          companyName: 'Google',
-          positionTitle: 'Software Developer',
-          fromDate: 'Dec 2020',
-          untilDate: 'Mar 2022',
-          tasks: 'A paragraph',
+          companyName: 'Company Name',
+          positionTitle: 'Position Title',
+          fromDate: 'Month Year',
+          untilDate: 'Month Year',
+          tasks: 'Tasks',
         },
       ],
       educationIds: [0],
@@ -38,20 +38,30 @@ class App extends React.Component<{}, AppState> {
     });
   };
 
-  // addWork = () => {
-  //   this.setState({
-  //     workIds: [...this.state.workIds, this.state.workCounter],
-  //     workCounter: this.state.workCounter + 1,
-  //   });
-  // };
+  addWork = () => {
+    this.setState({
+      workObjects: [
+        ...this.state.workObjects,
+        {
+          id: this.state.workCounter,
+          companyName: 'Company Name',
+          positionTitle: 'Position Title',
+          fromDate: 'Month Year',
+          untilDate: 'Month Year',
+          tasks: 'Tasks',
+        },
+      ],
+      workCounter: this.state.workCounter + 1,
+    });
+  };
 
-  // removeWork = (id: number) => {
-  //   this.setState({
-  //     workIds: this.state.workIds.filter((workId) => {
-  //       workId !== id;
-  //     }),
-  //   });
-  // };
+  removeWork = (id: number) => {
+    this.setState({
+      workObjects: this.state.workObjects.filter(
+        (workObject) => workObject.id !== id
+      ),
+    });
+  };
 
   addEducation = () => {
     this.setState({
@@ -80,6 +90,7 @@ class App extends React.Component<{}, AppState> {
               key={workObject.id}
               workObject={workObject}
               onUpdate={this.updateWork}
+              onRemove={this.removeWork}
             />
           ))}
           <button onClick={this.addWork}>Add Work Experience</button>
