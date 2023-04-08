@@ -8,8 +8,6 @@ class App extends React.Component<{}, AppState> {
   constructor(props: any) {
     super(props);
 
-    // App to be refactored to hold Work and Experience related states
-    // Known issue: upon clicking "Remove" button for one Work or Experience component all get deleted
     this.state = {
       workCounter: 1,
       workObjects: [
@@ -22,8 +20,15 @@ class App extends React.Component<{}, AppState> {
           tasks: 'Tasks',
         },
       ],
-      educationIds: [0],
       educationCounter: 1,
+      educationObjects: [
+        {
+          id: 0,
+          schoolName: 'School Name',
+          degree: 'Degree',
+          date: 'Attendance Dates',
+        },
+      ],
     };
   }
 
@@ -31,10 +36,10 @@ class App extends React.Component<{}, AppState> {
     const index = this.state.workObjects.findIndex(
       (obj) => obj.id == updatedWorkObject.id
     );
-    const newWorkObjects = this.state.workObjects;
-    newWorkObjects[index] = updatedWorkObject;
+    const newObjects = this.state.workObjects;
+    newObjects[index] = updatedWorkObject;
     this.setState({
-      workObjects: newWorkObjects,
+      workObjects: newObjects,
     });
   };
 
@@ -63,23 +68,42 @@ class App extends React.Component<{}, AppState> {
     });
   };
 
+  updateEducation = (updatedEducationObject: any) => {
+    const index = this.state.educationObjects.findIndex(
+      (obj) => obj.id == updatedEducationObject.id
+    );
+    const newObjects = this.state.workObjects;
+    newObjects[index] = updatedEducationObject;
+    this.setState({
+      educationObjects: newObjects,
+    });
+  };
+
   addEducation = () => {
     this.setState({
-      educationIds: [...this.state.educationIds, this.state.educationCounter],
+      educationObjects: [
+        ...this.state.educationObjects,
+        {
+          id: this.state.educationCounter,
+          schoolName: 'School Name',
+          degree: 'Degree',
+          date: 'Attendance Dates',
+        },
+      ],
       educationCounter: this.state.educationCounter + 1,
     });
   };
 
   removeEducation = (id: number) => {
     this.setState({
-      educationIds: this.state.educationIds.filter((educationId) => {
-        educationId !== id;
-      }),
+      educationObjects: this.state.educationObjects.filter(
+        (educationObject) => educationObject.id !== id
+      ),
     });
   };
 
   render() {
-    const { workObjects, educationIds } = this.state;
+    const { workObjects, educationObjects } = this.state;
 
     return (
       <div className="app">
@@ -97,11 +121,12 @@ class App extends React.Component<{}, AppState> {
         </div>
         <div className="section">
           <h1>Education</h1>
-          {educationIds.map((educationId) => (
+          {educationObjects.map((educationObject) => (
             <Education
-              key={educationId}
-              id={educationId}
-              onRemoveClick={this.removeEducation}
+              key={educationObject.id}
+              educationObject={educationObject}
+              onUpdate={this.updateEducation}
+              onRemove={this.removeEducation}
             />
           ))}
           <button onClick={this.addEducation}>Add Education</button>

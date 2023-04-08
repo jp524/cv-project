@@ -8,44 +8,34 @@ class Education extends React.Component<EducationProps, EducationState> {
 
     this.state = {
       updating: false,
+      id: 0,
       schoolName: 'University of Toronto',
       degree: 'Bachelor of Engineering',
       date: '2015-2020',
-      educationState: { schoolName: '', degree: '', date: '' },
     };
   }
 
+  applyStateToProps = () => {
+    this.setState({
+      id: this.props.educationObject.id,
+      schoolName: this.props.educationObject.schoolName,
+      degree: this.props.educationObject.degree,
+      date: this.props.educationObject.date,
+    });
+  };
+
   updateMode = () => {
-    this.setState((prevState: any) => ({
+    this.setState({
       updating: true,
-      educationState: {
-        ...prevState.educationState,
-        schoolName: this.state.schoolName,
-        degree: this.state.degree,
-        date: this.state.date,
-      },
-    }));
+    });
+    this.applyStateToProps();
   };
 
   cancelUpdate = () => {
     this.setState({
       updating: false,
-      schoolName: this.state.educationState.schoolName,
-      degree: this.state.educationState.degree,
-      date: this.state.educationState.date,
     });
-    this.resetPrevState;
-  };
-
-  resetPrevState = () => {
-    this.setState((prevState: any) => ({
-      educationState: {
-        ...prevState.educationState,
-        schoolName: '',
-        degree: '',
-        date: '',
-      },
-    }));
+    this.applyStateToProps();
   };
 
   onInputChange = (e: { target: { name: any; value: any } }) => {
@@ -59,11 +49,19 @@ class Education extends React.Component<EducationProps, EducationState> {
     this.setState({
       updating: false,
     });
-    this.resetPrevState;
+    const { id, schoolName, degree, date } = this.state;
+    const updatedEducationObject = {
+      id,
+      schoolName,
+      degree,
+      date,
+    };
+    this.props.onUpdate(updatedEducationObject);
   };
 
   render() {
     const { updating, schoolName, degree, date } = this.state;
+    const { educationObject } = this.props;
     const updateView = (
       <form onSubmit={this.onSubmitForm}>
         <label htmlFor="schoolName">
@@ -105,15 +103,15 @@ class Education extends React.Component<EducationProps, EducationState> {
 
     const staticView = (
       <div>
-        <p>{schoolName}</p>
-        <p>{degree}</p>
-        <p>{date}</p>
+        <p>{educationObject.schoolName}</p>
+        <p>{educationObject.degree}</p>
+        <p>{educationObject.date}</p>
         <button type="button" onClick={this.updateMode}>
           Edit
         </button>
         <button
           type="button"
-          onClick={() => this.props.onRemoveClick(this.props.id)}
+          onClick={() => this.props.onRemove(educationObject.id)}
         >
           Remove
         </button>

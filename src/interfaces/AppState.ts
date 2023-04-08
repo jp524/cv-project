@@ -8,8 +8,13 @@ interface AppState {
     untilDate: string;
     tasks: string;
   }[];
-  educationIds: number[];
   educationCounter: number;
+  educationObjects: {
+    id: number;
+    schoolName: string;
+    degree: string;
+    date: string;
+  }[];
 }
 
 export default AppState;
