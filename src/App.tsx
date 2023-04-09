@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './styles/App.scss';
 import General from './components/General';
 import Education from './components/Education';
 import Work from './components/Work';
@@ -136,7 +136,7 @@ class App extends React.Component<{}, AppState> {
     const { generalObject, workObjects, educationObjects } = this.state;
 
     return (
-      <div className="app">
+      <div className="container">
         <div className="section">
           <General
             generalObject={generalObject}
