@@ -93,10 +93,18 @@ class Education extends React.Component<EducationProps, EducationState> {
         </label>
 
         <div className="form--actions">
-          <button type="button" onClick={this.cancelUpdate}>
+          <button
+            type="button"
+            onClick={this.cancelUpdate}
+            className="btn btn--light btn--small"
+          >
             Cancel
           </button>
-          <input type="submit" value="Update" />
+          <input
+            type="submit"
+            value="Update"
+            className="btn btn--secondary btn--small"
+          />
         </div>
       </form>
     );
@@ -106,12 +114,17 @@ class Education extends React.Component<EducationProps, EducationState> {
         <p>{educationObject.schoolName}</p>
         <p>{educationObject.degree}</p>
         <p>{educationObject.date}</p>
-        <button type="button" onClick={this.updateMode}>
+        <button
+          type="button"
+          onClick={this.updateMode}
+          className="btn btn--light btn--small"
+        >
           Edit
         </button>
         <button
           type="button"
           onClick={() => this.props.onRemove(educationObject.id)}
+          className="btn btn--light btn--small"
         >
           Remove
         </button>

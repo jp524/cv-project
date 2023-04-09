@@ -153,7 +153,12 @@ class App extends React.Component<{}, AppState> {
               onRemove={this.removeWork}
             />
           ))}
-          <button onClick={this.addWork}>Add Work Experience</button>
+          <button
+            onClick={this.addWork}
+            className="btn btn--primary btn--small"
+          >
+            Add Work Experience
+          </button>
         </div>
         <div className="section">
           <h1>Education</h1>
@@ -165,7 +170,12 @@ class App extends React.Component<{}, AppState> {
               onRemove={this.removeEducation}
             />
           ))}
-          <button onClick={this.addEducation}>Add Education</button>
+          <button
+            onClick={this.addEducation}
+            className="btn btn--primary btn--small"
+          >
+            Add Education
+          </button>
         </div>
       </div>
     );

@@ -112,14 +112,23 @@ class Work extends React.Component<WorkProps, WorkState> {
 
         <label htmlFor="tasks">
           Taks:
-          <textarea name="tasks" value={tasks} onChange={this.onInputChange} />
+          <textarea
+            name="tasks"
+            value={tasks}
+            onChange={this.onInputChange}
+            className="btn btn--light btn--small"
+          />
         </label>
 
         <div className="form--actions">
           <button type="button" onClick={this.cancelUpdate}>
             Cancel
           </button>
-          <input type="submit" value="Update" />
+          <input
+            type="submit"
+            value="Update"
+            className="btn btn--secondary btn--small"
+          />
         </div>
       </form>
     );
@@ -131,12 +140,17 @@ class Work extends React.Component<WorkProps, WorkState> {
         <p>{workObject.fromDate}</p>
         <p>{workObject.untilDate}</p>
         <p className="textarea">{workObject.tasks}</p>
-        <button type="button" onClick={this.updateMode}>
+        <button
+          type="button"
+          onClick={this.updateMode}
+          className="btn btn--light btn--small"
+        >
           Edit
         </button>
         <button
           type="button"
           onClick={() => this.props.onRemove(workObject.id)}
+          className="btn btn--light btn--small"
         >
           Remove
         </button>

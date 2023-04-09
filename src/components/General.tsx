@@ -102,10 +102,18 @@ class General extends React.Component<GeneralProps, GeneralState> {
         </label>
 
         <div className="form--actions">
-          <button type="button" onClick={this.cancelUpdate}>
+          <button
+            type="button"
+            onClick={this.cancelUpdate}
+            className="btn btn--light btn--small"
+          >
             Cancel
           </button>
-          <input type="submit" value="Update" />
+          <input
+            type="submit"
+            value="Update"
+            className="btn btn--secondary btn--small"
+          />
         </div>
       </form>
     );
@@ -116,7 +124,11 @@ class General extends React.Component<GeneralProps, GeneralState> {
         <p>{generalObject.email}</p>
         <p>{generalObject.phone}</p>
         <p>{generalObject.city}</p>
-        <button type="button" onClick={this.updateMode}>
+        <button
+          type="button"
+          onClick={this.updateMode}
+          className="btn btn--light btn--small"
+        >
           Edit
         </button>
       </div>
