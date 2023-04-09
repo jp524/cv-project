@@ -7,8 +7,15 @@ interface WorkProps {
     untilDate: string;
     tasks: string;
   };
-  onUpdate: React.MouseEventHandler<HTMLButtonElement>;
-  onRemove: React.MouseEventHandler<HTMLButtonElement>;
+  onUpdate: (updatedWorkObject: {
+    id: number;
+    companyName: string;
+    positionTitle: string;
+    fromDate: string;
+    untilDate: string;
+    tasks: string;
+  }) => void;
+  onRemove: (id: number) => void;
 }
 
 export default WorkProps;

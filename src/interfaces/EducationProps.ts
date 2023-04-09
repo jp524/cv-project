@@ -5,8 +5,13 @@ interface EducationProps {
     degree: string;
     date: string;
   };
-  onUpdate: React.MouseEventHandler<HTMLButtonElement>;
-  onRemove: React.MouseEventHandler<HTMLButtonElement>;
+  onUpdate: (updatedEducationObject: {
+    id: number;
+    schoolName: string;
+    degree: string;
+    date: string;
+  }) => void;
+  onRemove: (id: number) => void;
 }
 
 export default EducationProps;

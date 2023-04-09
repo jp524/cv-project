@@ -32,7 +32,14 @@ class App extends React.Component<{}, AppState> {
     };
   }
 
-  updateWork = (updatedWorkObject: any) => {
+  updateWork = (updatedWorkObject: {
+    id: number;
+    companyName: string;
+    positionTitle: string;
+    fromDate: string;
+    untilDate: string;
+    tasks: string;
+  }) => {
     const index = this.state.workObjects.findIndex(
       (obj) => obj.id == updatedWorkObject.id
     );
@@ -68,11 +75,16 @@ class App extends React.Component<{}, AppState> {
     });
   };
 
-  updateEducation = (updatedEducationObject: any) => {
+  updateEducation = (updatedEducationObject: {
+    id: number;
+    schoolName: string;
+    degree: string;
+    date: string;
+  }) => {
     const index = this.state.educationObjects.findIndex(
       (obj) => obj.id == updatedEducationObject.id
     );
-    const newObjects = this.state.workObjects;
+    const newObjects = this.state.educationObjects;
     newObjects[index] = updatedEducationObject;
     this.setState({
       educationObjects: newObjects,
