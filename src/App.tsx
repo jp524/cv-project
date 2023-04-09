@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import General from './components/General';
 import Education from './components/Education';
 import Work from './components/Work';
 import AppState from './interfaces/AppState';
@@ -9,6 +10,12 @@ class App extends React.Component<{}, AppState> {
     super(props);
 
     this.state = {
+      generalObject: {
+        name: 'Name',
+        email: 'Email',
+        phone: 'Phone Number',
+        city: 'City, Country',
+      },
       workCounter: 1,
       workObjects: [
         {
@@ -31,6 +38,17 @@ class App extends React.Component<{}, AppState> {
       ],
     };
   }
+
+  updateGeneral = (updatedGeneralObject: {
+    name: string;
+    email: string;
+    phone: string;
+    city: string;
+  }) => {
+    this.setState({
+      generalObject: updatedGeneralObject,
+    });
+  };
 
   updateWork = (updatedWorkObject: {
     id: number;
@@ -115,10 +133,16 @@ class App extends React.Component<{}, AppState> {
   };
 
   render() {
-    const { workObjects, educationObjects } = this.state;
+    const { generalObject, workObjects, educationObjects } = this.state;
 
     return (
       <div className="app">
+        <div className="section">
+          <General
+            generalObject={generalObject}
+            onUpdate={this.updateGeneral}
+          />
+        </div>
         <div className="section">
           <h1>Work</h1>
           {workObjects.map((workObject) => (
