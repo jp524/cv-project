@@ -8,65 +8,137 @@ class App extends React.Component<{}, AppState> {
   constructor(props: any) {
     super(props);
 
-    // App to be refactored to hold Work and Experience related states
-    // Known issue: upon clicking "Remove" button for one Work or Experience component all get deleted
     this.state = {
-      workIds: [0],
       workCounter: 1,
-      educationIds: [0],
+      workObjects: [
+        {
+          id: 0,
+          companyName: 'Company Name',
+          positionTitle: 'Position Title',
+          fromDate: 'Month Year',
+          untilDate: 'Month Year',
+          tasks: 'Tasks',
+        },
+      ],
       educationCounter: 1,
+      educationObjects: [
+        {
+          id: 0,
+          schoolName: 'School Name',
+          degree: 'Degree',
+          date: 'Attendance Dates',
+        },
+      ],
     };
   }
 
+  updateWork = (updatedWorkObject: {
+    id: number;
+    companyName: string;
+    positionTitle: string;
+    fromDate: string;
+    untilDate: string;
+    tasks: string;
+  }) => {
+    const index = this.state.workObjects.findIndex(
+      (obj) => obj.id == updatedWorkObject.id
+    );
+    const newObjects = this.state.workObjects;
+    newObjects[index] = updatedWorkObject;
+    this.setState({
+      workObjects: newObjects,
+    });
+  };
+
   addWork = () => {
     this.setState({
-      workIds: [...this.state.workIds, this.state.workCounter],
+      workObjects: [
+        ...this.state.workObjects,
+        {
+          id: this.state.workCounter,
+          companyName: 'Company Name',
+          positionTitle: 'Position Title',
+          fromDate: 'Month Year',
+          untilDate: 'Month Year',
+          tasks: 'Tasks',
+        },
+      ],
       workCounter: this.state.workCounter + 1,
     });
   };
 
   removeWork = (id: number) => {
     this.setState({
-      workIds: this.state.workIds.filter((workId) => {
-        workId !== id;
-      }),
+      workObjects: this.state.workObjects.filter(
+        (workObject) => workObject.id !== id
+      ),
+    });
+  };
+
+  updateEducation = (updatedEducationObject: {
+    id: number;
+    schoolName: string;
+    degree: string;
+    date: string;
+  }) => {
+    const index = this.state.educationObjects.findIndex(
+      (obj) => obj.id == updatedEducationObject.id
+    );
+    const newObjects = this.state.educationObjects;
+    newObjects[index] = updatedEducationObject;
+    this.setState({
+      educationObjects: newObjects,
     });
   };
 
   addEducation = () => {
     this.setState({
-      educationIds: [...this.state.educationIds, this.state.educationCounter],
+      educationObjects: [
+        ...this.state.educationObjects,
+        {
+          id: this.state.educationCounter,
+          schoolName: 'School Name',
+          degree: 'Degree',
+          date: 'Attendance Dates',
+        },
+      ],
       educationCounter: this.state.educationCounter + 1,
     });
   };
 
   removeEducation = (id: number) => {
     this.setState({
-      educationIds: this.state.educationIds.filter((educationId) => {
-        educationId !== id;
-      }),
+      educationObjects: this.state.educationObjects.filter(
+        (educationObject) => educationObject.id !== id
+      ),
     });
   };
 
   render() {
-    const { workIds, educationIds } = this.state;
+    const { workObjects, educationObjects } = this.state;
 
     return (
       <div className="app">
         <div className="section">
           <h1>Work</h1>
-          {workIds.map((workId) => (
-            <Work key={workId} id={workId} onRemoveClick={this.removeWork} />
+          {workObjects.map((workObject) => (
+            <Work
+              key={workObject.id}
+              workObject={workObject}
+              onUpdate={this.updateWork}
+              onRemove={this.removeWork}
+            />
           ))}
           <button onClick={this.addWork}>Add Work Experience</button>
         </div>
         <div className="section">
           <h1>Education</h1>
-          {educationIds.map((educationId) => (
+          {educationObjects.map((educationObject) => (
             <Education
-              key={educationId}
-              id={educationId}
-              onRemoveClick={this.removeEducation}
+              key={educationObject.id}
+              educationObject={educationObject}
+              onUpdate={this.updateEducation}
+              onRemove={this.removeEducation}
             />
           ))}
           <button onClick={this.addEducation}>Add Education</button>
