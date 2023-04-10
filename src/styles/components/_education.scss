@@ -1,0 +1,14 @@
+.education {
+  margin-top: $space-s;
+
+  &--static {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &--line {
+      display: flex;
+      gap: $space-xs;
+    }
+  }
+}

@@ -63,7 +63,7 @@ class Education extends React.Component<EducationProps, EducationState> {
     const { updating, schoolName, degree, date } = this.state;
     const { educationObject } = this.props;
     const updateView = (
-      <form onSubmit={this.onSubmitForm}>
+      <form onSubmit={this.onSubmitForm} className="form">
         <label htmlFor="schoolName">
           School Name:
           <input
@@ -110,24 +110,32 @@ class Education extends React.Component<EducationProps, EducationState> {
     );
 
     const staticView = (
-      <div>
-        <p>{educationObject.schoolName}</p>
-        <p>{educationObject.degree}</p>
-        <p>{educationObject.date}</p>
-        <button
-          type="button"
-          onClick={this.updateMode}
-          className="btn btn--light btn--small"
-        >
-          Edit
-        </button>
-        <button
-          type="button"
-          onClick={() => this.props.onRemove(educationObject.id)}
-          className="btn btn--light btn--small"
-        >
-          Remove
-        </button>
+      <div className="education--static">
+        <div className="education--static--line">
+          <p>{educationObject.schoolName}</p>
+        </div>
+        <div className="education--static--line">
+          <p>{educationObject.degree}</p>
+        </div>
+        <div className="education--static--line">
+          <p>{educationObject.date}</p>
+        </div>
+        <div className="education--static--line">
+          <button
+            type="button"
+            onClick={this.updateMode}
+            className="btn btn--light btn--small"
+          >
+            Edit
+          </button>
+          <button
+            type="button"
+            onClick={() => this.props.onRemove(educationObject.id)}
+            className="btn btn--light btn--small"
+          >
+            Remove
+          </button>
+        </div>
       </div>
     );
 
