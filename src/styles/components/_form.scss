@@ -8,6 +8,10 @@
     margin-left: $space-xxs;
   }
 
+  label textarea {
+    margin-left: $space-xxs;
+  }
+
   &--actions {
     display: flex;
     gap: $space-xxs;

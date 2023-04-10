@@ -111,7 +111,7 @@ class Work extends React.Component<WorkProps, WorkState> {
         </label>
 
         <label htmlFor="tasks">
-          Taks:
+          Tasks:
           <textarea name="tasks" value={tasks} onChange={this.onInputChange} />
         </label>
 
