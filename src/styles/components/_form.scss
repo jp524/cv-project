@@ -1,0 +1,15 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-xxs;
+
+  label input {
+    margin-left: $space-xxs;
+  }
+
+  &--actions {
+    display: flex;
+    gap: $space-xxs;
+  }
+}

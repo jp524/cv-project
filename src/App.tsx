@@ -137,7 +137,7 @@ class App extends React.Component<{}, AppState> {
 
     return (
       <div className="container">
-        <div className="section">
+        <div className="section general">
           <General
             generalObject={generalObject}
             onUpdate={this.updateGeneral}

@@ -63,13 +63,22 @@ class General extends React.Component<GeneralProps, GeneralState> {
     const { updating, name, email, phone, city } = this.state;
     const { generalObject } = this.props;
     const updateView = (
-      <form onSubmit={this.onSubmitForm}>
+      <form onSubmit={this.onSubmitForm} className="form">
         <label htmlFor="name">
           Name:
           <input
             type="text"
             name="name"
             value={name}
+            onChange={this.onInputChange}
+          />
+        </label>
+        <label htmlFor="city">
+          City, Country:
+          <input
+            type="text"
+            name="city"
+            value={city}
             onChange={this.onInputChange}
           />
         </label>
@@ -88,15 +97,6 @@ class General extends React.Component<GeneralProps, GeneralState> {
             type="text"
             name="phone"
             value={phone}
-            onChange={this.onInputChange}
-          />
-        </label>
-        <label htmlFor="city">
-          City, Country:
-          <input
-            type="text"
-            name="city"
-            value={city}
             onChange={this.onInputChange}
           />
         </label>
@@ -119,24 +119,28 @@ class General extends React.Component<GeneralProps, GeneralState> {
     );
 
     const staticView = (
-      <div>
-        <p>{generalObject.name}</p>
-        <p>{generalObject.email}</p>
-        <p>{generalObject.phone}</p>
-        <p>{generalObject.city}</p>
-        <button
-          type="button"
-          onClick={this.updateMode}
-          className="btn btn--light btn--small"
-        >
-          Edit
-        </button>
+      <div className="general--static">
+        <div className="general--static--line">
+          <h2>{generalObject.name}</h2>
+        </div>
+        <div className="general--static--line">
+          <p>{generalObject.city}</p>
+          <p>{generalObject.email}</p>
+          <p>{generalObject.phone}</p>
+        </div>
+        <div className="general--static--line">
+          <button
+            type="button"
+            onClick={this.updateMode}
+            className="btn btn--light btn--small"
+          >
+            Edit
+          </button>
+        </div>
       </div>
     );
 
-    return (
-      <div className="education">{updating ? updateView : staticView}</div>
-    );
+    return <div>{updating ? updateView : staticView}</div>;
   }
 }
 

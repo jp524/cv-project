@@ -1,9 +1,3 @@
-// form {
-//   display: flex;
-//   flex-direction: column;
-//   align-items: flex-start;
-// }
-
 // .textarea {
 //   white-space: pre-wrap;
 // }
@@ -15,3 +9,5 @@
 @import 'layouts/container';
 
 @import 'components/btn';
+@import 'components/form';
+@import 'components/general';
