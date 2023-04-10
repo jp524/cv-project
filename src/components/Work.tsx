@@ -71,7 +71,7 @@ class Work extends React.Component<WorkProps, WorkState> {
       this.state;
     const { workObject } = this.props;
     const updateView = (
-      <form onSubmit={this.onSubmitForm}>
+      <form onSubmit={this.onSubmitForm} className="form">
         <label htmlFor="companyName">
           Company Name:
           <input
@@ -112,16 +112,15 @@ class Work extends React.Component<WorkProps, WorkState> {
 
         <label htmlFor="tasks">
           Taks:
-          <textarea
-            name="tasks"
-            value={tasks}
-            onChange={this.onInputChange}
-            className="btn btn--light btn--small"
-          />
+          <textarea name="tasks" value={tasks} onChange={this.onInputChange} />
         </label>
 
         <div className="form--actions">
-          <button type="button" onClick={this.cancelUpdate}>
+          <button
+            type="button"
+            onClick={this.cancelUpdate}
+            className="btn btn--light btn--small"
+          >
             Cancel
           </button>
           <input
@@ -134,26 +133,35 @@ class Work extends React.Component<WorkProps, WorkState> {
     );
 
     const staticView = (
-      <div>
-        <p>{workObject.companyName}</p>
-        <p>{workObject.positionTitle}</p>
-        <p>{workObject.fromDate}</p>
-        <p>{workObject.untilDate}</p>
-        <p className="textarea">{workObject.tasks}</p>
-        <button
-          type="button"
-          onClick={this.updateMode}
-          className="btn btn--light btn--small"
-        >
-          Edit
-        </button>
-        <button
-          type="button"
-          onClick={() => this.props.onRemove(workObject.id)}
-          className="btn btn--light btn--small"
-        >
-          Remove
-        </button>
+      <div className="work--static">
+        <div className="work--static--line work--static--bold">
+          <p>{workObject.companyName}</p>
+        </div>
+        <div className="work--static--line work--static--bold">
+          <p>{workObject.positionTitle}</p>
+          <p>
+            {workObject.fromDate} - {workObject.untilDate}
+          </p>
+        </div>
+        <div className="work--static--line">
+          <p className="textarea">{workObject.tasks}</p>
+        </div>
+        <div className="work--static--line">
+          <button
+            type="button"
+            onClick={this.updateMode}
+            className="btn btn--light btn--small"
+          >
+            Edit
+          </button>
+          <button
+            type="button"
+            onClick={() => this.props.onRemove(workObject.id)}
+            className="btn btn--light btn--small"
+          >
+            Remove
+          </button>
+        </div>
       </div>
     );
 
