@@ -12,7 +12,7 @@ Multiple educational or work experiences can be added and edited independently.
 
 ## Techniques Implemented
 
-- Class-based components
+- Functional components (Hooks)
 - Type checking using TypeScript
 - Passing props between components
 - Storing multiple instances of components and allowing independent editing
