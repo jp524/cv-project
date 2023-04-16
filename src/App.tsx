@@ -82,12 +82,18 @@ const App = () => {
     degree: string;
     date: string;
   }) => {
-    const index = educationObjects.findIndex(
-      (obj) => obj.id == updatedEducationObject.id
+    setEducationObjects(
+      educationObjects.map((obj) =>
+        obj.id === updatedEducationObject.id
+          ? {
+              ...obj,
+              schoolName: updatedEducationObject.schoolName,
+              degree: updatedEducationObject.degree,
+              date: updatedEducationObject.date,
+            }
+          : obj
+      )
     );
-    const newObjects = educationObjects;
-    newObjects[index] = updatedEducationObject;
-    setEducationObjects(newObjects);
   };
 
   const addEducation = () => {
