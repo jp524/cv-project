@@ -49,12 +49,20 @@ const App = () => {
     untilDate: string;
     tasks: string;
   }) => {
-    const index = workObjects.findIndex(
-      (obj) => obj.id == updatedWorkObject.id
+    setWorkObjects(
+      workObjects.map((obj) =>
+        obj.id === updatedWorkObject.id
+          ? {
+              ...obj,
+              companyName: updatedWorkObject.companyName,
+              positionTitle: updatedWorkObject.positionTitle,
+              fromDate: updatedWorkObject.fromDate,
+              untilDate: updatedWorkObject.untilDate,
+              task: updatedWorkObject.tasks,
+            }
+          : obj
+      )
     );
-    const newObjects = workObjects;
-    newObjects[index] = updatedWorkObject;
-    setWorkObjects(newObjects);
   };
 
   const addWork = () => {
